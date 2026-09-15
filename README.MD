@@ -64,7 +64,7 @@ Click the button below to open the Installer in a new browser tab:
 
 <div align="center">
 
-<a href="https://YOUR-GITHUB-USERNAME.github.io/trendify-nexus-installer/" target="_blank">
+<a href="https://trendiify.github.io/trendify-nexus-installer/" target="_blank">
   <img src="https://img.shields.io/badge/🚀%20OPEN%20INSTALLER-111827?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Open Installer">
 </a>
 
@@ -303,7 +303,7 @@ Deploy پنل
 
 <div align="center">
 
-<a href="https://YOUR-GITHUB-USERNAME.github.io/trendify-nexus-installer/" target="_blank">
+<a href="https://trendiify.github.io/trendify-nexus-installer/" target="_blank">
   <img src="https://img.shields.io/badge/🚀%20باز%20کردن%20Trendify%20Nexus%20Installer-111827?style=for-the-badge&logo=cloudflare&logoColor=white" alt="باز کردن Installer">
 </a>
 
