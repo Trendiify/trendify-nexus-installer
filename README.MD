@@ -15,7 +15,7 @@
 
 <br>
 
-<a href="https://trendiify.github.io/trendify-nexus-installer/" target="_blank">
+<a href="https://trendiify.github.io/trendify-nexus-installer/" target="_new">
   <img src="https://img.shields.io/badge/🚀%20Open%20Trendify%20Nexus%20Installer-0f172a?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Open Installer">
 </a>
 
