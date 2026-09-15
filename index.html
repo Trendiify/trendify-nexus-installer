@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Trendify Nexus Installer</title>
+
+<style>
+:root{
+  --bg:#070b14;
+  --panel:#0d1422;
+  --panel2:#111a2b;
+  --border:#202d43;
+  --gold:#d8b36a;
+  --gold2:#f0d99a;
+  --text:#f5f7fb;
+  --muted:#8d9ab0;
+  --green:#53d88a;
+  --red:#ff6b6b;
+  --blue:#65a9ff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(216,179,106,.12),
+      transparent 40%
+    ),
+    var(--bg);
+  color:var(--text);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px;
+}
+
+.container{
+  width:100%;
+  max-width:760px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:30px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border:1px solid rgba(216,179,106,.5);
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:var(--gold);
+  font-weight:800;
+  font-size:18px;
+
+  background:rgba(216,179,106,.05);
+}
+
+.brand-title{
+  font-size:20px;
+  font-weight:800;
+}
+
+.brand-sub{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:3px;
+}
+
+.card{
+  background:
+    linear-gradient(
+      145deg,
+      var(--panel),
+      #0a101b
+    );
+
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:38px;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.35);
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  border:1px solid rgba(216,179,106,.25);
+  background:rgba(216,179,106,.06);
+
+  color:var(--gold2);
+
+  border-radius:999px;
+
+  padding:7px 12px;
+
+  font-size:12px;
+
+  margin-bottom:20px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--green);
+
+  box-shadow:
+    0 0 12px var(--green);
+}
+
+h1{
+  margin:0;
+
+  font-size:42px;
+
+  letter-spacing:-1.5px;
+}
+
+.description{
+  color:var(--muted);
+
+  line-height:1.7;
+
+  margin:12px 0 30px;
+
+  max-width:620px;
+}
+
+label{
+  display:block;
+
+  font-size:13px;
+
+  font-weight:700;
+
+  margin-bottom:9px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+input{
+  width:100%;
+
+  background:#080e19;
+
+  color:white;
+
+  border:1px solid var(--border);
+
+  outline:none;
+
+  border-radius:14px;
+
+  padding:15px 16px;
+
+  font-size:14px;
+
+  transition:.2s;
+}
+
+input:focus{
+  border-color:
+    rgba(216,179,106,.7);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(216,179,106,.08);
+}
+
+.token-help{
+  color:var(--muted);
+
+  font-size:11px;
+
+  margin-top:9px;
+
+  line-height:1.6;
+}
+
+button{
+  width:100%;
+
+  margin-top:24px;
+
+  border:0;
+
+  border-radius:14px;
+
+  padding:15px;
+
+  font-size:14px;
+
+  font-weight:800;
+
+  cursor:pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold),
+      var(--gold2)
+    );
+
+  color:#15100a;
+
+  transition:.2s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+
+  box-shadow:
+    0 10px 30px
+    rgba(216,179,106,.15);
+}
+
+button:disabled{
+  opacity:.5;
+
+  cursor:not-allowed;
+
+  transform:none;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.install-list{
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+  margin-top:25px;
+}
+
+.install-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:13px;
+
+  padding:14px;
+
+  border:1px solid var(--border);
+
+  border-radius:13px;
+
+  background:
+    rgba(255,255,255,.015);
+}
+
+.install-icon{
+  width:30px;
+  height:30px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border:1px solid var(--border);
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  flex-shrink:0;
+}
+
+.install-item.active{
+  border-color:
+    rgba(101,169,255,.35);
+}
+
+.install-item.active
+.install-icon{
+  color:var(--blue);
+
+  border-color:var(--blue);
+}
+
+.install-item.done{
+  border-color:
+    rgba(83,216,138,.3);
+}
+
+.install-item.done
+.install-icon{
+  color:var(--green);
+
+  border-color:var(--green);
+}
+
+.install-item.error{
+  border-color:
+    rgba(255,107,107,.4);
+}
+
+.install-item.error
+.install-icon{
+  color:var(--red);
+
+  border-color:var(--red);
+}
+
+.install-name{
+  font-size:13px;
+
+  font-weight:700;
+}
+
+.install-status{
+  color:var(--muted);
+
+  font-size:11px;
+
+  margin-top:3px;
+}
+
+.error-box{
+  margin-top:20px;
+
+  padding:14px;
+
+  border:
+    1px solid
+    rgba(255,107,107,.35);
+
+  background:
+    rgba(255,107,107,.06);
+
+  color:#ffb4b4;
+
+  border-radius:12px;
+
+  font-size:12px;
+
+  line-height:1.7;
+
+  word-break:break-word;
+}
+
+.success{
+  text-align:center;
+}
+
+.success-icon{
+  width:70px;
+  height:70px;
+
+  margin:
+    0 auto 20px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:28px;
+
+  color:var(--green);
+
+  border:
+    1px solid
+    rgba(83,216,138,.4);
+
+  background:
+    rgba(83,216,138,.06);
+}
+
+.success h2{
+  margin:0;
+
+  font-size:28px;
+}
+
+.success p{
+  color:var(--muted);
+
+  line-height:1.7;
+}
+
+.url-box{
+  margin-top:25px;
+
+  padding:18px;
+
+  border-radius:14px;
+
+  background:#080e19;
+
+  border:1px solid var(--border);
+
+  text-align:left;
+}
+
+.url-label{
+  color:var(--muted);
+
+  font-size:11px;
+
+  margin-bottom:7px;
+}
+
+.url{
+  color:var(--gold2);
+
+  font-size:14px;
+
+  word-break:break-all;
+}
+
+.footer{
+  text-align:center;
+
+  color:#5f6b80;
+
+  font-size:11px;
+
+  margin-top:20px;
+}
+
+@media(max-width:600px){
+
+  body{
+    padding:15px;
+  }
+
+  .card{
+    padding:25px 20px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- BRAND -->
+
+  <div class="brand">
+
+    <div class="logo">
+      TN
+    </div>
+
+    <div>
+
+      <div class="brand-title">
+        Trendify Nexus
+      </div>
+
+      <div class="brand-sub">
+        Cloudflare-native control panel
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       SETUP
+  ====================================================== -->
+
+  <div
+    id="setupView"
+    class="card"
+  >
+
+    <div class="badge">
+
+      <span class="dot"></span>
+
+      Cloudflare Native Installer
+
+    </div>
+
+
+    <h1>
+      Install Nexus
+    </h1>
+
+
+    <div class="description">
+
+      Connect your Cloudflare account and deploy
+      Trendify Nexus automatically.
+
+      No server, VPS or custom domain is required.
+
+    </div>
+
+
+    <label for="token">
+      Cloudflare API Token
+    </label>
+
+
+    <div class="input-wrap">
+
+      <input
+        id="token"
+        type="password"
+        autocomplete="off"
+        placeholder="cfut_••••••••••••••••••••"
+      >
+
+    </div>
+
+
+    <div class="token-help">
+
+      The token is used only during installation
+      and is not saved by this installer.
+
+    </div>
+
+
+    <button
+      id="installBtn"
+      onclick="startInstallation()"
+    >
+
+      Install Trendify Nexus
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       INSTALLATION
+  ====================================================== -->
+
+  <div
+    id="installView"
+    class="card hidden"
+  >
+
+    <div class="badge">
+
+      <span class="dot"></span>
+
+      Installing
+
+    </div>
+
+
+    <h1>
+      Setting up Nexus
+    </h1>
+
+
+    <div class="description">
+
+      Please keep this page open while Cloudflare
+      resources are being created.
+
+    </div>
+
+
+    <div class="install-list">
+
+
+      <div
+        class="install-item"
+        id="item1"
+      >
+
+        <div class="install-icon">
+          1
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Verify Cloudflare Token
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="install-item"
+        id="item2"
+      >
+
+        <div class="install-icon">
+          2
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Detect Cloudflare Account
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="install-item"
+        id="item3"
+      >
+
+        <div class="install-icon">
+          3
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Create Nexus Database
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="install-item"
+        id="item4"
+      >
+
+        <div class="install-icon">
+          4
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Deploy Nexus Worker
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="install-item"
+        id="item5"
+      >
+
+        <div class="install-icon">
+          5
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Connect D1 Database
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="install-item"
+        id="item6"
+      >
+
+        <div class="install-icon">
+          6
+        </div>
+
+        <div>
+
+          <div class="install-name">
+            Enable workers.dev
+          </div>
+
+          <div class="install-status">
+            Waiting
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div
+      id="errorBox"
+      class="error-box hidden"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       COMPLETE
+  ====================================================== -->
+
+  <div
+    id="completeView"
+    class="card hidden"
+  >
+
+    <div class="success">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+
+      <h2>
+        Trendify Nexus is Ready
+      </h2>
+
+
+      <p>
+        Your Cloudflare-native panel has been
+        successfully deployed.
+      </p>
+
+
+      <div class="url-box">
+
+        <div class="url-label">
+          NEXUS PANEL
+        </div>
+
+
+        <div
+          id="panelUrl"
+          class="url"
+        ></div>
+
+      </div>
+
+
+      <button
+        onclick="openDashboard()"
+      >
+
+        Open Trendify Nexus
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer">
+
+    Trendify Nexus • Cloudflare-native
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const INSTALLER_API =
+  "https://trendify-installer-api.barcelona-campp.workers.dev";
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let cloudflareToken = "";
+
+let panelUrl = "";
+
+
+/* =========================================================
+   VIEW
+========================================================= */
+
+function showView(id){
+
+  document
+    .getElementById("setupView")
+    .classList.add("hidden");
+
+  document
+    .getElementById("installView")
+    .classList.add("hidden");
+
+  document
+    .getElementById("completeView")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+}
+
+
+/* =========================================================
+   STEP UI
+========================================================= */
+
+function setStep(
+  number,
+  state,
+  text
+){
+
+  const item =
+    document.getElementById(
+      "item" + number
+    );
+
+
+  if(!item){
+    return;
+  }
+
+
+  item.classList.remove(
+    "active",
+    "done",
+    "error"
+  );
+
+
+  if(state){
+    item.classList.add(state);
+  }
+
+
+  const status =
+    item.querySelector(
+      ".install-status"
+    );
+
+
+  if(status){
+    status.textContent =
+      text;
+  }
+
+
+  const icon =
+    item.querySelector(
+      ".install-icon"
+    );
+
+
+  if(
+    icon &&
+    state === "done"
+  ){
+
+    icon.textContent =
+      "✓";
+  }
+
+
+  if(
+    icon &&
+    state === "error"
+  ){
+
+    icon.textContent =
+      "!";
+  }
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(error){
+
+  const box =
+    document.getElementById(
+      "errorBox"
+    );
+
+
+  box.textContent =
+    error?.message ||
+    String(error);
+
+
+  box.classList.remove(
+    "hidden"
+  );
+}
+
+
+/* =========================================================
+   INSTALLER API
+========================================================= */
+
+async function installerRequest(
+  path,
+  body
+){
+
+  const response =
+    await fetch(
+      INSTALLER_API + path,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify(body)
+      }
+    );
+
+
+  let data;
+
+
+  try{
+
+    data =
+      await response.json();
+
+  }catch{
+
+    throw new Error(
+      "Installer API returned an invalid response."
+    );
+
+  }
+
+
+  if(
+    !response.ok ||
+    data.success === false
+  ){
+
+    throw new Error(
+      data.error ||
+      "Installer API request failed."
+    );
+
+  }
+
+
+  return data;
+}
+
+
+/* =========================================================
+   INSTALLATION
+========================================================= */
+
+async function startInstallation(){
+
+  const tokenInput =
+    document.getElementById(
+      "token"
+    );
+
+
+  cloudflareToken =
+    tokenInput.value.trim();
+
+
+  if(!cloudflareToken){
+
+    alert(
+      "Please enter your Cloudflare API Token."
+    );
+
+    return;
+  }
+
+
+  const button =
+    document.getElementById(
+      "installBtn"
+    );
+
+
+  button.disabled =
+    true;
+
+
+  document
+    .getElementById(
+      "errorBox"
+    )
+    .classList
+    .add("hidden");
+
+
+  showView(
+    "installView"
+  );
+
+
+  try{
+
+    /*
+      The actual installation is performed
+      by the Installer API Worker.
+
+      The browser never calls
+      api.cloudflare.com directly.
+    */
+
+
+    setStep(
+      1,
+      "active",
+      "Verifying Cloudflare token..."
+    );
+
+
+    setStep(
+      2,
+      "active",
+      "Detecting Cloudflare account..."
+    );
+
+
+    setStep(
+      3,
+      "active",
+      "Creating Nexus database..."
+    );
+
+
+    setStep(
+      4,
+      "active",
+      "Deploying Nexus Worker..."
+    );
+
+
+    setStep(
+      5,
+      "active",
+      "Connecting D1 database..."
+    );
+
+
+    setStep(
+      6,
+      "active",
+      "Enabling workers.dev..."
+    );
+
+
+    /*
+      ONE request.
+
+      The Installer Worker performs:
+
+      1. Token verification
+      2. Account detection
+      3. D1 creation
+      4. D1 initialization
+      5. workers.dev setup
+      6. Nexus Worker deployment
+      7. D1 binding
+      8. workers.dev activation
+    */
+
+    const result =
+      await installerRequest(
+        "/install",
+        {
+          token:
+            cloudflareToken
+        }
+      );
+
+
+    /*
+      Installation succeeded.
+    */
+
+
+    setStep(
+      1,
+      "done",
+      "Token verified"
+    );
+
+
+    setStep(
+      2,
+      "done",
+      result.account?.name ||
+      "Cloudflare account detected"
+    );
+
+
+    setStep(
+      3,
+      "done",
+      "D1 database ready"
+    );
+
+
+    setStep(
+      4,
+      "done",
+      "Nexus Worker deployed"
+    );
+
+
+    setStep(
+      5,
+      "done",
+      "Database connected"
+    );
+
+
+    setStep(
+      6,
+      "done",
+      "workers.dev enabled"
+    );
+
+
+    panelUrl =
+      result.worker?.url;
+
+
+    if(!panelUrl){
+
+      throw new Error(
+        "Installation completed but the Nexus Worker URL was not returned."
+      );
+    }
+
+
+    document
+      .getElementById(
+        "panelUrl"
+      )
+      .textContent =
+      panelUrl;
+
+
+    showView(
+      "completeView"
+    );
+
+
+    /*
+      Clear token from browser memory
+      after installation.
+    */
+
+    cloudflareToken = "";
+
+    tokenInput.value = "";
+
+
+  }catch(error){
+
+    console.error(
+      "Installation failed:",
+      error
+    );
+
+
+    /*
+      Find active step
+      and mark it as failed.
+    */
+
+    for(
+      let i = 1;
+      i <= 6;
+      i++
+    ){
+
+      const item =
+        document.getElementById(
+          "item" + i
+        );
+
+
+      if(
+        item &&
+        item.classList.contains(
+          "active"
+        )
+      ){
+
+        setStep(
+          i,
+          "error",
+          "Installation failed"
+        );
+
+        break;
+      }
+
+    }
+
+
+    showError(
+      error
+    );
+
+
+  }finally{
+
+    button.disabled =
+      false;
+  }
+
+}
+
+
+/* =========================================================
+   OPEN DASHBOARD
+========================================================= */
+
+function openDashboard(){
+
+  if(!panelUrl){
+    return;
+  }
+
+
+  window.open(
+    panelUrl,
+    "_blank",
+    "noopener,noreferrer"
+  );
+}
+
+</script>
+
+</body>
+</html>
